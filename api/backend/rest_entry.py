@@ -1,9 +1,10 @@
 from flask import Flask
-
 from backend.db_connection import db
-from backend.customers.customer_routes import customers
-from backend.products.products_routes import products
-from backend.simple.simple_routes import simple_routes
+from backend.foodlog.foodlog_route import foodlog_route
+from backend.moodlog.moodlog_route import moodlog_route
+from backend.sleeplog.sleeplog_route import sleeplog_route
+from backend.heartratelog.heartratelog_route import heartratelog_route
+from backend.workoutlog.workoutlog_route import workoutlog_route
 import os
 from dotenv import load_dotenv
 
@@ -39,9 +40,11 @@ def create_app():
     # Register the routes from each Blueprint with the app object
     # and give a url prefix to each
     app.logger.info('current_app(): registering blueprints with Flask app object.')   
-    app.register_blueprint(simple_routes)
-    app.register_blueprint(customers,   url_prefix='/c')
-    app.register_blueprint(products,    url_prefix='/p')
+    app.register_blueprint(foodlog_route,  url_prefix='/foodlog')
+    app.register_blueprint(moodlog_route,  url_prefix='/moodlog')
+    app.register_blueprint(sleeplog_route, url_prefix='/sleeplog')
+    app.register_blueprint(heartratelog_route, url_prefix='/heartratelog')
+    app.register_blueprint(workoutlog_route, url_prefix='/workoutlog')
 
     # Don't forget to return the app object
     return app
