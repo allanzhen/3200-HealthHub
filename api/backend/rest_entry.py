@@ -5,6 +5,7 @@ from backend.moodlog.moodlog_route import moodlog_route
 from backend.sleeplog.sleeplog_route import sleeplog_route
 from backend.heartratelog.heartratelog_route import heartratelog_route
 from backend.workoutlog.workoutlog_route import workoutlog_route
+from backend.admin.admin_route import admin_route
 import os
 from dotenv import load_dotenv
 
@@ -45,6 +46,7 @@ def create_app():
     app.register_blueprint(sleeplog_route, url_prefix='/sleeplog')
     app.register_blueprint(heartratelog_route, url_prefix='/heartratelog')
     app.register_blueprint(workoutlog_route, url_prefix='/workoutlog')
+    app.register_blueprint(admin_route, url_prefix='/a')
 
     # Don't forget to return the app object
     return app
