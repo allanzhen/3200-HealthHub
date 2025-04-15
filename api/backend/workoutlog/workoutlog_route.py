@@ -145,3 +145,17 @@ def update_workout_log(logID):
     the_response.status_code = 200
     return the_response
 
+#------------------------------------------------------------
+# delete a log
+@workoutlog_route.route('/<logID>', methods=['DELETE'])
+def delete_workout_log(logID):
+    current_app.logger.info(f'DELETE /workoutlog/{logID} route')
+
+    cursor = db.get_db().cursor()
+    query = 'DELETE FROM WorkoutLog WHERE LogID = %s'
+    cursor.execute(query, (logID,))
+    db.get_db().commit()
+
+    the_response = make_response(jsonify({'message': 'Workout log deleted'}))
+    the_response.status_code = 200
+    return the_response
