@@ -30,4 +30,4 @@ if st.button("View Strength Progression",
 if st.button("Calculate PR Weights", 
              type='primary',
              use_container_width=True):
-    st.switch_page('pages/12_Robert_PRCalculator.py')
+    st.switch_page('pages/06_pr_calc.py')
