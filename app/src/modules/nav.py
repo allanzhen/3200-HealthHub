@@ -80,4 +80,5 @@ def SideBarLinks(show_home=True):
             EmployeeTicketsNav()
 
         if (st.session_state['role'] == 'user'):
+            ## INSERT THE NAVS YOU WANT HERE FOR USERS
             WorkoutHeatmapNav()
