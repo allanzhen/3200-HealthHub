@@ -39,3 +39,4 @@ if res.status_code == 200:
         st.warning("this exercise has no data")
 else:
     st.error("could not get data")
+###
