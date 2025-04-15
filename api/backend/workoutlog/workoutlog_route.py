@@ -81,3 +81,23 @@ def get_pr():
     response = make_response(jsonify(data))
     response.status_code = 200
     return response
+
+#------------------------------------------------------------
+# add a new workout log
+@workoutlog_route.route('/pr', methods=['GET'])
+def get_pr():
+    current_app.logger.info('GET /workoutlog/pr route')
+
+    cursor = db.get_db().cursor()
+    query = '''
+        SELECT ExerciseType, MAX(WeightUsed) AS PR
+        FROM WorkoutLog
+        GROUP BY ExerciseType
+    '''
+    cursor.execute(query)
+    data = cursor.fetchall()
+
+    response = make_response(jsonify(data))
+    response.status_code = 200
+    return response
+
