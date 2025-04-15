@@ -1,6 +1,5 @@
 ########################################################
-# Sample customers blueprint of endpoints
-# Remove this file if you are not using it in your project
+# MoodLog blueprint of endpoints
 ########################################################
 from flask import Blueprint
 from flask import request
@@ -61,3 +60,50 @@ def get_mood(moodID):
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     return the_response
+
+#------------------------------------------------------------
+# Inserts mood and its data to the mood log
+@moodlog_route.route('/', methods=['POST'])
+def add_mood_log():
+    current_app.logger.info('POST /moodlog route')
+
+    data = request.get_json()
+    cursor = db.get_db().cursor()
+
+    query = '''
+        INSERT INTO MoodLog (UserID, Date, Mood)
+        VALUES (%s, %s, %s)
+    '''
+
+    cursor.execute(query, (
+        data["user_id"], 
+        data["date"], 
+        data["mood"]
+    ))
+    db.get_db().commit()
+
+    the_response = make_response(jsonify({"message": "Mood log added"}))
+    the_response.status_code = 201
+    return the_response
+
+#------------------------------------------------------------
+# Update mood log info for customer with particular LogID
+@moodlog_route.route('/', methods=['PUT'])
+def update_moodlog():
+    current_app.logger.info('PUT /moodlog route')
+    data = request.json
+
+    query = '''
+        UPDATE MoodLog
+        SET UserID = %s, Date = %s, Mood = %s
+        WHERE LogID = %s
+    '''
+    values = (
+        data['UserID'], data['Date'], data['Mood'], data['LogID']
+    )
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query, values)
+    db.get_db().commit()
+
+    return jsonify({'message': 'Mood log updated!'}), 200

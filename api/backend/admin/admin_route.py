@@ -47,7 +47,6 @@ def get_support_tickets():
     the_query = '''
     SELECT *
     FROM SupportTicket
-    WHERE Status = 'Open'
     '''
 
     cursor.execute(the_query)
@@ -170,5 +169,52 @@ def update_user():
         response_message += f"Successfully updated name '{name}' to '{new_name}'\n"
     
     response = make_response(response_message)
+    response.status_code = 200
+    return response
+
+@admin_route.route('/support_tix', methods=['PUT'])
+def update_support_ticket():
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    id = the_data['TicketID']
+    status = the_data['Status']
+
+    query = f'''
+        UPDATE SupportTicket
+        SET Status = '{status}'
+        WHERE TicketID = {id};
+    '''
+
+    current_app.logger.info(query)
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    response = make_response('Successfully updated support ticket.')
+    response.status_code = 200
+    return response
+
+@admin_route.route('/employee_tix', methods=['POST'])
+def assign_employee_ticket():
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    employee = the_data['EmployeeID']
+    ticket = the_data['TicketID']
+
+    query = f'''
+        INSERT INTO TicketEmployee(TicketID, EmployeeID)
+        VALUES ({ticket}, {employee});
+    '''
+
+    current_app.logger.info(query)
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    response = make_response('Successfully assigned work')
     response.status_code = 200
     return response

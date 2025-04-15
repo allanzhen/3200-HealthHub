@@ -89,4 +89,28 @@ def add_food_log():
     the_response.status_code = 201
     return the_response
 
+#------------------------------------------------------------
+# Update food log info for customer with particular userID
+@foodlog_route.route('/', methods=['PUT'])
+def update_foodlog():
+    current_app.logger.info('PUT /foodlog route')
+    data = request.json
+
+    query = '''
+        UPDATE FoodLog
+        SET UserID = %s, Date = %s, MealType = %s, FoodID = %s,
+            Calories = %s, Protein = %s, Carbs = %s, Fats = %s
+        WHERE LogID = %s
+    '''
+    values = (
+        data['UserID'], data['Date'], data['MealType'], data['FoodID'],
+        data['Calories'], data['Protein'], data['Carbs'],
+        data['Fats'], data['LogID']
+    )
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query, values)
+    db.get_db().commit()
+
+    return jsonify({'message': 'Food log updated!'}), 200
 
