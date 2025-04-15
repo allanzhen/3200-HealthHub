@@ -18,10 +18,10 @@ st.write('')
 st.write('### What would you like to view today?')
 
 # Buttons to navigate to different pages
-if st.button('View Mood + Sleep Calendar', 
+if st.button('View Calendar', 
              type='primary',
              use_container_width=True):
-    st.switch_page('pages/16_Mood_Sleep_Calendar.py')
+    st.switch_page('pages/18_Calendar.py')
 
 if st.button('Add Food Log', 
              type='primary',
