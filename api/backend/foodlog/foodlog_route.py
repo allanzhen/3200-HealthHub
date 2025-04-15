@@ -61,3 +61,32 @@ def get_food_log(foodLogID):
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     return the_response
+
+#------------------------------------------------------------
+# Inserts food and its data to the food log
+@foodlog_route.route('/', methods=['POST'])
+def add_food_log():
+    current_app.logger.info('POST /foodlog route')
+
+    data = request.get_json()
+    cursor = db.get_db().cursor()
+
+    query = '''
+        INSERT INTO FoodLog (UserID, Date, FoodID, Calories, MealType)
+        VALUES (%s, %s, %s, %s, %s)
+    '''
+
+    cursor.execute(query, (
+        data["user_id"], 
+        data["date"], 
+        data["food_id"], 
+        data["calories"], 
+        data["meal_type"]
+    ))
+    db.get_db().commit()
+
+    the_response = make_response(jsonify({"message": "Food log added"}))
+    the_response.status_code = 201
+    return the_response
+
+
