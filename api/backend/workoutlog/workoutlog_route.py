@@ -159,3 +159,31 @@ def delete_workout_log(logID):
     the_response = make_response(jsonify({'message': 'Workout log deleted'}))
     the_response.status_code = 200
     return the_response
+
+#------------------------------------------------------------
+# gets data for progression in terms of strength
+@workoutlog_route.route('/progression', methods=['GET'])
+def get_progression_data():
+    current_app.logger.info('GET /workoutlog/progression route')
+
+    exercise = request.args.get('exercise')
+
+    if not exercise:
+        the_response = make_response(jsonify({'error': 'Missing exercise parameter'}))
+        the_response.status_code = 400
+        return the_response
+
+    cursor = db.get_db().cursor()
+    query = '''
+        SELECT Date, WeightUsed
+        FROM WorkoutLog
+        WHERE ExerciseType = %s
+        ORDER BY Date ASC
+    '''
+    cursor.execute(query, (exercise,))
+    theData = cursor.fetchall()
+
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
+
