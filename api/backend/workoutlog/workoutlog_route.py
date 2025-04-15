@@ -84,20 +84,64 @@ def get_pr():
 
 #------------------------------------------------------------
 # add a new workout log
-@workoutlog_route.route('/pr', methods=['GET'])
-def get_pr():
-    current_app.logger.info('GET /workoutlog/pr route')
+@workoutlog_route.route('/', methods=['POST'])
+def add_workout():
+    current_app.logger.info('POST /workoutlog route')
 
+    data = request.get_json()
     cursor = db.get_db().cursor()
-    query = '''
-        SELECT ExerciseType, MAX(WeightUsed) AS PR
-        FROM WorkoutLog
-        GROUP BY ExerciseType
-    '''
-    cursor.execute(query)
-    data = cursor.fetchall()
 
-    response = make_response(jsonify(data))
-    response.status_code = 200
+    query = '''
+        INSERT INTO WorkoutLog (UserID, Date, ExerciseType, Duration, 
+                                CaloriesBurned, TrainerNotes, setCount, repsInSet, WeightUsed)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    '''
+    cursor.execute(query, (
+        data["user_id"],
+        data["date"],
+        data["exercise"],
+        data["duration"],
+        data["calories_burned"],
+        data["trainer_notes"],
+        data["sets"],
+        data["reps"],
+        data["weight"]
+    ))
+    db.get_db().commit()
+
+    response = make_response(jsonify({"message": "Workout added"}))
+    response.status_code = 201
     return response
+#------------------------------------------------------------
+# updates a existing log
+@workoutlog_route.route('/<logID>', methods=['PUT'])
+def update_workout_log(logID):
+    current_app.logger.info(f'PUT /workoutlog/{logID} route')
+
+    data = request.get_json()
+    cursor = db.get_db().cursor()
+
+    query = '''
+        UPDATE WorkoutLog
+        SET ExerciseType = %s, Duration = %s, CaloriesBurned = %s,
+            TrainerNotes = %s, setCount = %s, repsInSet = %s, WeightUsed = %s
+        WHERE LogID = %s
+    '''
+    values = (
+        data['exercise'],
+        data['duration'],
+        data['calories_burned'],
+        data['trainer_notes'],
+        data['sets'],
+        data['reps'],
+        data['weight'],
+        logID
+    )
+
+    cursor.execute(query, values)
+    db.get_db().commit()
+
+    the_response = make_response(jsonify({'message': 'Workout log updated'}))
+    the_response.status_code = 200
+    return the_response
 
