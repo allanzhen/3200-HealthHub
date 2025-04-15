@@ -94,7 +94,7 @@ if st.button("Act as Robert, a User",
     # finally, we ask streamlit to switch to another page, in this case, the 
     # landing page for this particular user type
     logger.info("Logging in as User")
-    st.switch_page('pages/06_robert_home_stream.py')
+    st.switch_page('pages/07_robert_home_stream.py')
 
     
 
