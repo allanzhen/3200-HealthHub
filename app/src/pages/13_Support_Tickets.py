@@ -19,3 +19,18 @@ try:
     st.dataframe(support_tickets)
 except:
     st.write('Could not get user list!')
+
+with st.form('Update a ticket\'s status'):
+    id = st.text_input("Input Ticket ID to be updated:")
+    status = st.text_input("Input the new status of the ticket (Open/Closed):")
+
+    submitted = st.form_submit_button("Submit")
+
+    if submitted:
+        data = {}
+        data['TicketID'] =  id
+        data['Status'] = status
+
+        st.write("Please refresh page to see updated table.")
+
+        requests.put('http://api:4000/a/support_tix', json=data)
