@@ -187,3 +187,22 @@ def get_progression_data():
     the_response.status_code = 200
     return the_response
 
+#------------------------------------------------------------
+# calculate target weight to hit PR
+@workoutlog_route.route('/prcalc', methods=['GET'])
+def get_prcalc():
+    current_app.logger.info('GET /workoutlog/prcalc route')
+
+    try:
+        goal_weight = float(request.args.get('goal'))
+        reps = int(request.args.get('reps'))
+        target_weight = round(goal_weight / (1 + reps / 30.0), 2)
+
+        the_response = make_response(jsonify({'target_weight_for_reps': target_weight}))
+        the_response.status_code = 200
+        return the_response
+
+    except (TypeError, ValueError):
+        the_response = make_response(jsonify({'error': 'Invalid parameters'}))
+        the_response.status_code = 400
+        return the_response
