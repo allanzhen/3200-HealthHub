@@ -106,4 +106,4 @@ def update_moodlog():
     cursor.execute(query, values)
     db.get_db().commit()
 
-    return jsonify({'message': 'Food log updated!'}), 200
+    return jsonify({'message': 'Mood log updated!'}), 200
