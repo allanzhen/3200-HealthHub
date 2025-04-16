@@ -13,6 +13,7 @@ mood_options = ['Happy', 'Sad', 'Stressed', 'Okay', 'Tired']
 
 st.write("## Add a new Mood Log")
 with st.form("Add a new Mood Log"):
+    # inputs
     log_id = st.number_input("Mood Log ID Number:", min_value=0, step=1)
     log_uid = st.number_input("User ID Number:", min_value=0, step=1)
     log_date = st.date_input("Date:", value=datetime.date.today())
