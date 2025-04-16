@@ -61,8 +61,8 @@ def get_support_tickets():
 def get_employee_tickets():
     cursor = db.get_db().cursor()
     the_query = '''
-    SELECT *
-    FROM TicketEmployee
+    SELECT te.AssignedAt, te.EmployeeID, te.TicketID, st.Status
+    FROM TicketEmployee te JOIN SupportTicket st ON st.TicketID = te.TicketID;
     '''
     cursor.execute(the_query)
     theData = cursor.fetchall()
