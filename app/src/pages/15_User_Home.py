@@ -37,3 +37,7 @@ if st.button("Add Workout Log",
              type='primary',
              use_container_width=True):
     st.switch_page('pages/19_Add_WorkoutLog.py')
+if st.button("Add Sleep Log",
+             type='primary',
+             use_container_width=True):
+    st.switch_page('pages/20_Add_SleepLog.py')
