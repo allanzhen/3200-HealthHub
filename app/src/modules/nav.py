@@ -27,6 +27,7 @@ def PredictionNav():
 def MoodSleepTrendsNav():
     st.sidebar.page_link("pages/03_MoodSleepTrends.py", label="Mood & Sleep Trends", icon="🛌")
 
+
 # ---------------------------------------------
 # Sidebar Navigation for Admin Dashboard
 # ---------------------------------------------
@@ -42,6 +43,16 @@ def SupportTicketsNav():
  
 def EmployeeTicketsNav():
      st.sidebar.page_link('pages/14_Employee_Tickets.py', label = 'Employee Tickets', icon='🪪')
+
+# ---------------------------------------------
+# Robert sidebars
+# ---------------------------------------------
+def WorkoutLog():
+    st.sidebar.page_link('pages/04_WorkoutLogger.py', label = ' Workout Log', icon='📓')
+def progressionGraph():
+    st.sidebar.page_link('pages/05_progression.py', label = ' Progression Graph', icon='📈')
+def prCalculator():
+    st.sidebar.page_link('pages/06_pr_calc.py', label = ' Personal Best Calculations', icon='🏋️‍♂️')
 
 # ---------------------------------------------
 # Main function to load Sidebar Links
@@ -82,3 +93,9 @@ def SideBarLinks(show_home=True):
         if (st.session_state['role'] == 'user'):
             ## INSERT THE NAVS YOU WANT HERE FOR USERS
             WorkoutHeatmapNav()
+            WorkoutLog()
+            progressionGraph()
+            prCalculator()
+            
+
+
