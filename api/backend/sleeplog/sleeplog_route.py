@@ -94,7 +94,7 @@ def add_sleep_log():
 # Update food log info for customer with particular userID
 @sleeplog_route.route('/', methods=['PUT'])
 def update_sleeplog():
-    current_app.logger.info('PUT /foodlog route')
+    current_app.logger.info('PUT /sleeplog route')
     data = request.json
 
     query = '''
