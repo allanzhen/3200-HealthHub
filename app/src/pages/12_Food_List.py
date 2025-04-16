@@ -21,7 +21,7 @@ except:
     st.write('Could not get user list!')
 
 with st.form("Add a food"):
-    id = st.text_input("Input Food ID:")
+    id = st.text_input("Input Food ID (Optional):")
     name = st.text_input("Input Food Name:")
     cals = st.text_input("Input Food Calories:")
 

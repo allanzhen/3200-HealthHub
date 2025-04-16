@@ -83,10 +83,16 @@ def add_food_item():
     name = the_data['FoodName']
     cals = the_data['Calories']
 
-    query = f'''
-        INSERT INTO Food (FoodID, FoodName, Calories)
-        VALUES({str(id)}, '{name}', {str(cals)});
-    '''
+    if id == None or id == '':
+        query = f'''
+            INSERT INTO Food (FoodName, Calories)
+            VALUES('{name}', {str(cals)});
+        '''
+    else:
+        query = f'''
+            INSERT INTO Food (FoodID, FoodName, Calories)
+            VALUES({str(id)}, '{name}', {str(cals)});
+        '''
 
     current_app.logger.info(query)
 
