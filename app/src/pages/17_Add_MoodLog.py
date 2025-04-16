@@ -8,6 +8,7 @@ import datetime
 
 SideBarLinks()
 
+# selectable mood options for dropdown menu
 mood_options = ['Happy', 'Sad', 'Stressed', 'Okay', 'Tired']
 
 st.write("## Add a new Mood Log")
@@ -19,7 +20,7 @@ with st.form("Add a new Mood Log"):
 
     submitted = st.form_submit_button("Submit")
 
-    if submitted:
+    if submitted: 
         data = {}
         data['LogID'] = log_id
         data['UserID'] = log_uid
