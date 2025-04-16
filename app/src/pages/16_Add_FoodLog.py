@@ -7,10 +7,13 @@ from modules.nav import SideBarLinks
 import datetime
 
 SideBarLinks()
+
+# meal options for dropdown menu
 meal_options = ['Breakfast', 'Lunch', 'Dinner', 'Snack']
 
 st.write("## Add a new Food Log")
 with st.form("Add a new Food Log"):
+    # inputs
     flog_id = st.number_input("Food Log ID Number:", min_value=0, step=1)
     flog_uid = st.number_input("User ID Number:", min_value=0, step=1)
     flog_date = st.date_input("Date:", value=datetime.date.today())
