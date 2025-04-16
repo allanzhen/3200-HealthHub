@@ -61,8 +61,8 @@ def addWorkoutLog():
     st.sidebar.page_link('pages/19_Add_WorkoutLog.py', label = 'Add a new Workout Log', icon = '💪')
 def addFoodLog():
     st.sidebar.page_link('pages/16_Add_FoodLog.py', label = 'Add New Food Log', icon = '🍱')
-def calendarView():
-    st.sidebar.page_link('pages/18_Calendar.py', label = 'Calendar', icon = '🗓️')
+# def calendarView():
+#     st.sidebar.page_link('pages/18_Calendar.py', label = 'Calendar', icon = '🗓️')
 def addMoodLog():
     st.sidebar.page_link('pages/17_AddMoodLog.py', label = 'Add New Mood Log', icon = '🧘')
 def addSleepLog():
@@ -110,6 +110,8 @@ def SideBarLinks(show_home=True):
             WorkoutLog()
             progressionGraph()
             prCalculator()
-            
+            addWorkoutLog()
+            addMoodLog()
+            addSleepLog()
 
 
