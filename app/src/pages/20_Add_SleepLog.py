@@ -9,6 +9,7 @@ SideBarLinks()
 
 st.write("## Add a new Sleep Log")
 with st.form("Add a new Sleep Log"):
+    # inputs
     log_id = st.number_input("Sleep Log ID Number:", min_value=0, step=1)
     log_uid = st.number_input("User ID Number:", min_value=0, step=1)
     log_date = st.date_input("Date:", value=datetime.date.today())
