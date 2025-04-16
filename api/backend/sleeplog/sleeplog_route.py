@@ -1,7 +1,4 @@
-########################################################
-# Sample customers blueprint of endpoints
-# Remove this file if you are not using it in your project
-########################################################
+# File: sleeplog_route.py
 from flask import Blueprint
 from flask import request
 from flask import jsonify
@@ -73,16 +70,16 @@ def add_sleep_log():
     cursor = db.get_db().cursor()
 
     query = '''
-        INSERT INTO SleepLog (UserID, Date, SleepDuration, SleepQuality)
+        INSERT INTO SleepLog (LogID, UserID, Date, SleepDuration, SleepQuality)
         VALUES (%s, %s, %s, %s, %s)
     '''
 
     cursor.execute(query, (
-        data["user_id"], 
-        data["date"], 
-        data["food_id"], 
-        data["calories"], 
-        data["meal_type"]
+        data["LogID"],
+        data["UserID"], 
+        data["Date"], 
+        data["SleepDuration"],
+        data["SleepQuality"], 
     ))
     db.get_db().commit()
 

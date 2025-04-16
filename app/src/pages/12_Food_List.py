@@ -13,7 +13,7 @@ from modules.nav import SideBarLinks
 SideBarLinks()
 st.header('Food List')
 
-food = requests.get('http://api:4000/a/food_list').json()
+food = requests.get('http://localhost:4000/admin/food_list').json()
 
 try:
     st.dataframe(food)
@@ -36,4 +36,4 @@ with st.form("Add a food"):
 
         st.write("Please refresh page to see updated table.")
 
-        requests.post('http://api:4000/a/food_list', json=data)
+        requests.post('http://localhost:4000/admin/food_list', json=data)

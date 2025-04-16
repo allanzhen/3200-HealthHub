@@ -46,7 +46,7 @@ def create_app():
     app.register_blueprint(sleeplog_route, url_prefix='/sleeplog')
     app.register_blueprint(heartratelog_route, url_prefix='/heartratelog')
     app.register_blueprint(workoutlog_route, url_prefix='/workoutlog')
-    app.register_blueprint(admin_route, url_prefix='/a')
+    app.register_blueprint(admin_route, url_prefix='/admin')
 
     # Don't forget to return the app object
     return app

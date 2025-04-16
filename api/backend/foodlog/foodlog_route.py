@@ -1,7 +1,3 @@
-########################################################
-# Sample customers blueprint of endpoints
-# Remove this file if you are not using it in your project
-########################################################
 from flask import Blueprint
 from flask import request
 from flask import jsonify
@@ -72,17 +68,19 @@ def add_food_log():
     cursor = db.get_db().cursor()
 
     query = '''
-        INSERT INTO FoodLog (UserID, Date, FoodID, Calories, MealType)
-        VALUES (%s, %s, %s, %s, %s)
+        INSERT INTO FoodLog (LogID, UserID, Date, FoodID, Calories, MealType)
+        VALUES (%s, %s, %s, %s, %s, %s)
     '''
 
     cursor.execute(query, (
-        data["user_id"], 
-        data["date"], 
-        data["food_id"], 
-        data["calories"], 
-        data["meal_type"]
+        data["LogID"], 
+        data["UserID"],
+        data["Date"],
+        data["FoodID"],
+        data["Calories"],
+        data["MealType"]
     ))
+
     db.get_db().commit()
 
     the_response = make_response(jsonify({"message": "Food log added"}))

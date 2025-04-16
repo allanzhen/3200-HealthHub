@@ -16,6 +16,7 @@ with st.form("Add a new Workout Log"):
     log_et = st.text_input("Exercise Type:")
     log_duration = st.number_input("Workout Duration:", min_value=0, step=1)
     log_cb = st.number_input("Calories Burned:", min_value=0, step=1)
+    log_tn = st.text_input("Trainer Notes:")
     log_sc = st.number_input("Number of Sets:", min_value=0, step=1)
     log_reps = st.number_input("Number of Repetitions:", min_value=0, step=1)
     log_weight = st.number_input("Weight Used:", format="%.2f", step=0.01)
@@ -29,9 +30,10 @@ with st.form("Add a new Workout Log"):
         data['ExerciseType'] = log_et
         data['Duration'] = log_duration
         data['CaloriesBurned'] = log_cb
+        data["TrainerNotes"] = log_tn
         data['setCount'] = log_sc
         data['repsInSet'] = log_reps
         data['WeightUsed'] = log_weight
         st.write(data)
 
-        requests.post('http://localhost:4000/workoutlog', json=data)
+        requests.post('http://localhost:4000/workoutlog/', json=data)

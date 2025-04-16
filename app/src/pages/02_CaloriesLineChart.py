@@ -27,7 +27,10 @@ if user_id:
         df = pd.DataFrame(workouts)
 
         if not df.empty:
-            df['Date'] = pd.to_datetime(df['Date'])
+            # Convert the 'Date' column to datetime with the correct format
+            df['Date'] = pd.to_datetime(df['Date'], format='%a, %d %b %Y %H:%M:%S GMT')
+
+            # Sort the data by date
             df = df.sort_values('Date')
 
             st.subheader("Calories Burned Over Time")
