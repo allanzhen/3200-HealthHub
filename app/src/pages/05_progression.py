@@ -12,7 +12,7 @@ SideBarLinks()
 st.header("robert's strength progression")
 
 API_URL = "http://localhost:4000"
-USER_ID = 100
+USER_ID = 1
 
 # Dropdowns for split and exercise
 st.subheader("select workout split and exercise")
@@ -26,10 +26,10 @@ if res.status_code == 200:
     data = res.json()
     df = pd.DataFrame(data)
     if not df.empty:
-        df["date"] = pd.to_datetime(df["date"])
-        df = df.sort_values("date")
+        df["Date"] = pd.to_datetime(df["Date"])
+        df = df.sort_values("Date")
         fig, ax = plt.subplots(figsize=(10, 5))
-        ax.plot(df["date"], df["weightused"], marker="o", linestyle="-", linewidth=2)
+        ax.plot(df["Date"], df["WeightUsed"], marker="o", linestyle="-", linewidth=2)
         ax.set_title(f"{exercise} Progression")
         ax.set_xlabel("Date")
         ax.set_ylabel("Weight")
@@ -39,4 +39,3 @@ if res.status_code == 200:
         st.warning("this exercise has no data")
 else:
     st.error("could not get data")
-###

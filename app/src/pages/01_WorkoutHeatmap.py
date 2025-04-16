@@ -30,10 +30,15 @@ if user_id:
         df = pd.DataFrame(workouts)
 
         if not df.empty:
-            df['Date'] = pd.to_datetime(df['Date'])
-            df['Day'] = df['Date'].dt.day
-            df['Month'] = df['Date'].dt.month
+            # Convert the Date column to the correct format
+            df['Date'] = pd.to_datetime(df['Date'], format='%a, %d %b %Y %H:%M:%S GMT')
+            df['Date'] = df['Date'].dt.strftime('%Y-%m-%d')  # Convert to YYYY-MM-DD format
 
+            # Extract day and month
+            df['Day'] = pd.to_datetime(df['Date']).dt.day
+            df['Month'] = pd.to_datetime(df['Date']).dt.month
+
+            # Pivot data for heatmap
             pivot = df.pivot_table(index='Month', columns='Day', values='Duration', aggfunc='sum')
 
             # Heatmap

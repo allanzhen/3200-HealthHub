@@ -28,4 +28,4 @@ with st.form("Add a new Sleep Log"):
         
         st.write(data)
 
-        requests.post('http://localhost:4000/sleeplog', json=data)
+        requests.post('http://localhost:4000/sleeplog/', json=data)

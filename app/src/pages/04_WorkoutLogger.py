@@ -1,5 +1,3 @@
-
-
 import logging
 logger = logging.getLogger(__name__)
 
@@ -15,12 +13,13 @@ st.header("Roberts Workout Logger")
 
 
 API_URL = "http://localhost:4000"
-USER_ID = 100
+
 
 # add a new workout
 st.subheader("Add a New Workout")
 
 with st.form("add_workout_form"):
+    log_id = st.number_input("Log ID", min_value=0, step=1)
     date = st.date_input("Workout Date")
     exercise = st.text_input("Exercise type")
     duration = st.number_input("Duration in Minutes", min_value=0)
@@ -34,15 +33,16 @@ with st.form("add_workout_form"):
 
     if submitted:
         workout_data = {
-            "user_id": USER_ID,
-            "date": str(date),
-            "exercise": exercise,
-            "duration": duration,
-            "calories_burned": calories,
-            "trainer_notes": notes,
-            "sets": sets,
-            "reps": reps,
-            "weight": weight
+            "UserID": 1,  # fixed UserID for Robert
+            "LogID": log_id,
+            "Date": str(date),
+            "ExerciseType": exercise,
+            "Duration": duration,
+            "CaloriesBurned": calories,
+            "TrainerNotes": notes,
+            "setCount": sets,
+            "repsInSet": reps,
+            "WeightUsed": weight
         }
 
         res = requests.post(f"{API_URL}/workoutlog", json=workout_data)
@@ -54,15 +54,15 @@ with st.form("add_workout_form"):
 
 # look at existing logs
 st.subheader("Previous Workouts")
-res = requests.get(f"{API_URL}/workoutlog", params={"user_id": USER_ID})
+res = requests.get(f"{API_URL}/workoutlog", params={"user_id": 1})
 if res.status_code == 200:
     logs = res.json()
     df = pd.DataFrame(logs)
     if not df.empty:
-        df['date'] = pd.to_datetime(df['date'])
-        df = df.sort_values("date", ascending=False)
-        df = df[["date", "ExerciseType", "Duration", "CaloriesBurned", "WeightUsed", "setCount", "repsInSet", "TrainerNotes"]]
-        df.columns = ["date", "Exercise", "Duration", "Calories", "Weight", "Sets", "Reps", "Notes"]
+        df['Date'] = pd.to_datetime(df['Date'])
+        df = df.sort_values("Date", ascending=False)
+        df = df[["Date", "ExerciseType", "Duration", "CaloriesBurned", "WeightUsed", "setCount", "repsInSet", "TrainerNotes"]]
+        df.columns = ["Date", "Exercise", "Duration", "Calories", "Weight", "Sets", "Reps", "Notes"]
 
         st.dataframe(df, use_container_width=True)
     else:

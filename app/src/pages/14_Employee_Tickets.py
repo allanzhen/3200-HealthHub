@@ -13,7 +13,7 @@ from modules.nav import SideBarLinks
 SideBarLinks()
 st.header('Employee Tickets')
 
-employee_tickets = requests.get('http://api:4000/a/employee_tix').json()
+employee_tickets = requests.get('http://localhost:4000/admin/employee_tix').json()
 
 try:
     st.dataframe(employee_tickets)
@@ -33,4 +33,4 @@ with st.form('Update a ticket\'s status'):
 
         st.write("Please refresh page to see updated table.")
 
-        requests.post('http://api:4000/a/employee_tix', json=data)
+        requests.post('http://localhost:4000/admin/employee_tix', json=data)

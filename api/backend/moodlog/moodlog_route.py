@@ -1,6 +1,4 @@
-########################################################
-# MoodLog blueprint of endpoints
-########################################################
+# File: sleeplog_route.py
 from flask import Blueprint
 from flask import request
 from flask import jsonify
@@ -71,21 +69,21 @@ def add_mood_log():
     cursor = db.get_db().cursor()
 
     query = '''
-        INSERT INTO MoodLog (UserID, Date, Mood)
-        VALUES (%s, %s, %s)
+        INSERT INTO MoodLog (UserID, LogID, Date, Mood)
+        VALUES (%s, %s, %s, %s)
     '''
 
     cursor.execute(query, (
-        data["user_id"], 
-        data["date"], 
-        data["mood"]
+        data["UserID"],  # UserID is required
+        data["LogID"],   # LogID is required
+        data["Date"],    # Date is required
+        data["Mood"]     # Mood is required
     ))
     db.get_db().commit()
 
     the_response = make_response(jsonify({"message": "Mood log added"}))
     the_response.status_code = 201
     return the_response
-
 #------------------------------------------------------------
 # Update mood log info for customer with particular LogID
 @moodlog_route.route('/', methods=['PUT'])

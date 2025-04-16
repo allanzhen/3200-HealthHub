@@ -13,7 +13,7 @@ from modules.nav import SideBarLinks
 SideBarLinks()
 st.header('User Data')
 
-users = requests.get('http://api:4000/a/users').json()
+users = requests.get('http://localhost:4000/admin/users').json()
 
 try:
     st.dataframe(users)
@@ -35,7 +35,7 @@ with st.form("Update a user's email"):
 
         st.write("Please refresh page to see updated table.")
 
-        requests.put('http://api:4000/a/users', json=data)
+        requests.put('http://localhost:4000/admin/users', json=data)
 
 with st.form("Update a user's name"):
     name = st.text_input("Input name to be changed:")
@@ -52,7 +52,7 @@ with st.form("Update a user's name"):
 
         st.write("Please refresh page to see updated table.")
 
-        requests.put('http://api:4000/a/users', json=data)
+        requests.put('http://localhost:4000/admin/users', json=data)
 
 with st.form("Delete a user:"):
     st.write("***WARNING CANNOT BE UNDONE")
@@ -66,4 +66,4 @@ with st.form("Delete a user:"):
 
         st.write("Please refresh page to see updated table.")
 
-        requests.delete('http://api:4000/a/users', json=data)
+        requests.delete('http://localhost:4000/admin/users', json=data)

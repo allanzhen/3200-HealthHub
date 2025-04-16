@@ -83,7 +83,7 @@ def get_pr():
     return response
 
 #------------------------------------------------------------
-# add a new workout log
+# Add a new workout log
 @workoutlog_route.route('/', methods=['POST'])
 def add_workout():
     current_app.logger.info('POST /workoutlog route')
@@ -92,21 +92,24 @@ def add_workout():
     cursor = db.get_db().cursor()
 
     query = '''
-        INSERT INTO WorkoutLog (UserID, Date, ExerciseType, Duration, 
+        INSERT INTO WorkoutLog (LogID, UserID, Date, ExerciseType, Duration, 
                                 CaloriesBurned, TrainerNotes, setCount, repsInSet, WeightUsed)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     '''
+    
     cursor.execute(query, (
-        data["user_id"],
-        data["date"],
-        data["exercise"],
-        data["duration"],
-        data["calories_burned"],
-        data["trainer_notes"],
-        data["sets"],
-        data["reps"],
-        data["weight"]
+        data["LogID"],
+        data["UserID"],          
+        data["Date"],            
+        data["ExerciseType"],    
+        data["Duration"],        
+        data["CaloriesBurned"],  
+        data["TrainerNotes"],    
+        data["setCount"],        
+        data["repsInSet"],       
+        data["WeightUsed"]       
     ))
+
     db.get_db().commit()
 
     response = make_response(jsonify({"message": "Workout added"}))
@@ -128,16 +131,16 @@ def update_workout_log(logID):
         WHERE LogID = %s
     '''
     values = (
-        data['exercise'],
-        data['duration'],
-        data['calories_burned'],
-        data['trainer_notes'],
-        data['sets'],
-        data['reps'],
-        data['weight'],
-        logID
+        data["Date"],
+        data["ExerciseType"],
+        data["Duration"],
+        data["CaloriesBurned"],
+        data["TrainerNotes"],
+        data["setCount"],
+        data["repsInSet"],
+        data["WeightUsed"],
+        data["LogID"],
     )
-
     cursor.execute(query, values)
     db.get_db().commit()
 
