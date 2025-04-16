@@ -64,7 +64,7 @@ def addFoodLog():
 # def calendarView():
 #     st.sidebar.page_link('pages/18_Calendar.py', label = 'Calendar', icon = '🗓️')
 def addMoodLog():
-    st.sidebar.page_link('pages/17_AddMoodLog.py', label = 'Add New Mood Log', icon = '🧘')
+    st.sidebar.page_link('pages/17_Add_MoodLog.py', label = 'Add New Mood Log', icon = '🧘')
 def addSleepLog():
     st.sidebar.page_link('pages/20_AddSleepLog.py', label = 'Add New Sleep Log', icon = '🛌')
 
