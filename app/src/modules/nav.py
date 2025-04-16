@@ -66,7 +66,7 @@ def addFoodLog():
 def addMoodLog():
     st.sidebar.page_link('pages/17_Add_MoodLog.py', label = 'Add New Mood Log', icon = '🧘')
 def addSleepLog():
-    st.sidebar.page_link('pages/20_AddSleepLog.py', label = 'Add New Sleep Log', icon = '🛌')
+    st.sidebar.page_link('pages/20_Add_SleepLog.py', label = 'Add New Sleep Log', icon = '🛌')
 
 # ---------------------------------------------
 # Main function to load Sidebar Links
