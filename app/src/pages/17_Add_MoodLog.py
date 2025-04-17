@@ -27,4 +27,16 @@ with st.form("Add a new Mood Log"):
         data['Date'] = str(log_date)
         data['Mood'] = log_mood
 
+                
+        # Display data in Streamlit
         st.write(data)
+
+        # Make a POST request to the backend API to save the mood log
+        try:
+            response = requests.post('http://localhost:4000/moodlog/', json=data)
+            if response.status_code == 201:
+                st.success("Mood log added successfully!")
+            else:
+                st.error(f"Failed to add mood log. Status code: {response.status_code}")
+        except requests.exceptions.RequestException as e:
+            st.error(f"An error occurred: {e}")

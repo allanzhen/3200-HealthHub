@@ -26,6 +26,16 @@ with st.form("Add a new Sleep Log"):
         data['SleepDuration'] = log_duration
         data['SleepQuality'] = log_quality
         
+        
+        # Display data in Streamlit
         st.write(data)
 
-        requests.post('http://localhost:4000/sleeplog/', json=data)
+        # Make a POST request to the backend API to save the sleep log
+        try:
+            response = requests.post('http://localhost:4000/sleeplog/', json=data)
+            if response.status_code == 201:
+                st.success("Sleep log added successfully!")
+            else:
+                st.error(f"Failed to add sleep log. Status code: {response.status_code}")
+        except requests.exceptions.RequestException as e:
+            st.error(f"An error occurred: {e}")

@@ -12,7 +12,7 @@ SideBarLinks()
 st.header("robert's strength progression")
 
 API_URL = "http://localhost:4000"
-USER_ID = 1
+USER_ID = 2
 
 # Dropdowns for split and exercise
 st.subheader("select workout split and exercise")
