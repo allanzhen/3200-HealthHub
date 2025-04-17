@@ -28,10 +28,10 @@ Make sure you have the following installed on your local machine:
 
 ### 1. Clone the Repository
  
-'''bash
+```bash
 - git clone https://github.com/allanzhen/3200-HealthHub.git
 - cd 3200-HealthHub
-'''
+```
 
 ### 2. Setting up .env
 
