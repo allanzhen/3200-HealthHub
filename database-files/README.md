@@ -13,7 +13,7 @@ Insert initial data if needed using INSERT
 
 Use Flask-SQLAlchemy to easily reset tables with db.drop_all() and db.create_all()
 
-'''bash
+```bash
 docker compose down db -d
 docker compose up db -d
-'''
+```
