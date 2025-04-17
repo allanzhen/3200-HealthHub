@@ -43,7 +43,7 @@ DB_NAME=HealthHub
 MYSQL_ROOT_PASSWORD=YourSecurePasswordHere
 ```
 ### 3. Setting up the Docker Compose -d 
-
+```
 version: 28.0.4 
 
 name: HealthHubContainers
@@ -74,4 +74,4 @@ services:
       - ./database-files:/docker-entrypoint-initdb.d/:ro
     ports:
       - 3201:3306
-
+```
