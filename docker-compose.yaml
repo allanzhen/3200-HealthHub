@@ -1,4 +1,4 @@
-name: project-app-testing
+name: project-app
 services:
   app-test:
     build: ./app
@@ -10,7 +10,7 @@ services:
 
   api-test:
     build: ./api
-    container_name: web-api-test
+    container_name: web-api
     hostname: web-api
     volumes: ["./api:/apicode"]
     ports:
@@ -20,7 +20,7 @@ services:
     env_file:
       - ./api/.env
     image: mysql:9
-    container_name: mysql-db-test
+    container_name: mysql-db
     hostname: db
     volumes:
       - ./database-files:/docker-entrypoint-initdb.d/:ro
