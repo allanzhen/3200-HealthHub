@@ -34,14 +34,14 @@ Make sure you have the following installed on your local machine:
 ```
 
 ### 2. Setting up .env
-
+```
 SECRET_KEY=someCrazyS3cR3T!Key.!
 DB_USER=root
 DB_HOST=localhost
 DB_PORT=3201
 DB_NAME=HealthHub
 MYSQL_ROOT_PASSWORD=YourSecurePasswordHere
-
+```
 ### 3. Setting up the Docker Compose -d 
 
 version: 28.0.4 
