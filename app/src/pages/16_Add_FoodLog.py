@@ -44,4 +44,16 @@ with st.form("Add a new Food Log"):
             'Fats': flog_fats
         }
 
+        # Display data in Streamlit
         st.write(data)
+
+        # Make a POST request to the backend API to save the food log
+        try:
+            response = requests.post('http://localhost:4000/foodlog/', json=data)
+            if response.status_code == 201:
+                st.success("Food log added successfully!")
+            else:
+                st.error(f"Failed to add food log. Status code: {response.status_code}")
+        except requests.exceptions.RequestException as e:
+            st.error(f"An error occurred: {e}")
+        

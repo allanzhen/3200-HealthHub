@@ -33,7 +33,7 @@ with st.form("add_workout_form"):
 
     if submitted:
         workout_data = {
-            "UserID": 1,  # fixed UserID for Robert
+            "UserID": 2,  # fixed UserID for Robert
             "LogID": log_id,
             "Date": str(date),
             "ExerciseType": exercise,
@@ -69,3 +69,5 @@ if res.status_code == 200:
         st.info("There Are No Workouts In the Log")
 else:
     st.error("error")
+
+

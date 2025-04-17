@@ -34,6 +34,17 @@ with st.form("Add a new Workout Log"):
         data['setCount'] = log_sc
         data['repsInSet'] = log_reps
         data['WeightUsed'] = log_weight
+
+        # Display data in Streamlit
         st.write(data)
 
-        requests.post('http://localhost:4000/workoutlog/', json=data)
+        # Make a POST request to the backend API to save the workout log
+        try:
+            response = requests.post('http://localhost:4000/workoutlog/', json=data)
+            if response.status_code == 201:
+                st.success("Workout log added successfully!")
+            else:
+                st.error(f"Failed to add workout log. Status code: {response.status_code}")
+        except requests.exceptions.RequestException as e:
+            st.error(f"An error occurred: {e}")
+        

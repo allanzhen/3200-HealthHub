@@ -1,8 +1,3 @@
-##################################################
-# This is the main/entry-point file for the 
-# sample application for your project
-##################################################
-
 # Set up basic logging infrastructure
 import logging
 logging.basicConfig(format='%(filename)s:%(lineno)s:%(levelname)s -- %(message)s', level=logging.INFO)
@@ -34,7 +29,7 @@ SideBarLinks(show_home=True)
 
 # set the title of the page and provide a simple prompt. 
 logger.info("Loading the Home page of the app")
-st.title('CS 3200 Sample Semester Project App')
+st.title('HealthHub')
 st.write('\n\n')
 st.write('### HI! As which user would you like to log in?')
 

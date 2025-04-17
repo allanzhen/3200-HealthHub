@@ -41,3 +41,7 @@ if st.button("Add Sleep Log",
              type='primary',
              use_container_width=True):
     st.switch_page('pages/20_Add_SleepLog.py')
+if st.button("Delete Workout Log",
+             type='primary',
+             use_container_width=True):
+    st.switch_page('pages/08_Delete_Workout.py')
